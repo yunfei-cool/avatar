@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 260 30% 8%;
+    --foreground: 45 80% 90%;
+    --card: 260 25% 12%;
+    --card-foreground: 45 80% 90%;
+    --popover: 260 25% 10%;
+    --popover-foreground: 45 80% 90%;
+    --primary: 45 80% 55%;
+    --primary-foreground: 260 30% 8%;
+    --secondary: 270 30% 18%;
+    --secondary-foreground: 45 80% 90%;
+    --muted: 260 20% 20%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 280 60% 40%;
+    --accent-foreground: 45 80% 90%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 260 20% 25%;
+    --input: 260 20% 20%;
+    --ring: 45 80% 55%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Noto Serif SC', 'Cinzel', serif;
+    background: linear-gradient(135deg, #0d0a1a 0%, #1a1230 50%, #0f0a20 100%);
+    min-height: 100vh;
+  }
+}
+
+/* Mystical Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-star-twinkle {
+  animation: star-twinkle 2s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Mystical Card Styles */
+.mystical-card {
+  background: linear-gradient(145deg, rgba(26, 18, 48, 0.9), rgba(15, 10, 32, 0.95));
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.mystical-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+/* Gold Gradient Text */
+.gold-text {
+  background: linear-gradient(135deg, #d4af37 0%, #f4e5c2 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Export Overrides: improve html2canvas fidelity */
+.report-export-mode .gold-text {
+  background: none !important;
+  -webkit-text-fill-color: #f4e5c2 !important;
+  color: #f4e5c2 !important;
+}
+
+.report-export-mode .animate-fade-in-up,
+.report-export-mode .animate-pulse,
+.report-export-mode .animate-star-twinkle,
+.report-export-mode .animate-rotate-slow {
+  animation: none !important;
+}
+
+.report-export-mode .mystical-card,
+.report-export-mode .tarot-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.report-export-mode .report-hero-top {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.report-export-mode .report-hero-badge {
+  display: inline-flex !important;
+  margin-bottom: 1rem !important;
+}
+
+.report-export-mode .report-hero-logo-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.report-export-mode .report-hero-logo-glow {
+  transform: none !important;
+}
+
+.report-hero-badge-text {
+  position: relative;
+  top: -1px;
+}
+
+.report-hero-symbol {
+  position: relative;
+  top: -1px;
+}
+
+/* html2canvas text baseline compensation (export-only) */
+.report-export-mode .report-hero-badge-text {
+  position: relative !important;
+  top: -4px !important;
+  transform: none !important;
+  line-height: 1 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif !important;
+}
+
+.report-export-mode .report-hero-symbol {
+  position: relative !important;
+  top: -7px !important;
+  transform: none !important;
+  line-height: 1 !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+}
+
+/* Purple Gradient Text */
+.purple-text {
+  background: linear-gradient(135deg, #9b7ed8 0%, #c9b8f0 50%, #9b7ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Star Field Background */
+.star-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* Upload Zone */
+.upload-zone {
+  border: 2px dashed rgba(212, 175, 55, 0.3);
+  background: rgba(26, 18, 48, 0.5);
+  transition: all 0.3s ease;
+}
+
+.upload-zone:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+  background: rgba(26, 18, 48, 0.7);
+}
+
+.upload-zone.dragover {
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+}
+
+/* Evidence Badge */
+.evidence-badge {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #d4af37;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Section Divider */
+.mystical-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+  margin: 2rem 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 10, 32, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.5);
+}
+
+/* Tarot Card Style */
+.tarot-card {
+  background: linear-gradient(145deg, #1a1230, #0f0a20);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.tarot-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+/* Constellation Pattern */
+.constellation-bg {
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 160px 20px, rgba(255,255,255,0.3), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+}
