@@ -3,6 +3,7 @@ import { Sparkles, Upload, Stars, Moon, Sun, ChevronRight, X, Image as ImageIcon
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { Analytics } from '@vercel/analytics/react';
 import type { TradeData, AnalysisReport, UploadedImage } from '@/types';
 import { analyzeTradingData, parseImageWithLLM } from '@/services/llmService';
 import { ReportView } from '@/sections/ReportView';
@@ -514,11 +515,21 @@ function App() {
   };
 
   if (isAnalyzing) {
-    return <LoadingState />;
+    return (
+      <>
+        <LoadingState />
+        <Analytics />
+      </>
+    );
   }
 
   if (report && tradeData) {
-    return <ReportView report={report} tradeData={tradeData} onReset={resetAnalysis} />;
+    return (
+      <>
+        <ReportView report={report} tradeData={tradeData} onReset={resetAnalysis} />
+        <Analytics />
+      </>
+    );
   }
 
   return (
@@ -685,6 +696,7 @@ function App() {
           <p>上传的数据仅用于分析，不会被存储</p>
         </footer>
       </div>
+      <Analytics />
     </div>
   );
 }
